@@ -233,10 +233,7 @@ export default function Home() {
       </aside>
 
       <main className="main-area">
-        <div className="topbar">
-          <div className="breadcrumbs"><span>iWof</span><span>/</span><strong>Manual interativo</strong></div>
-          <div className="topbar-actions"><span className="last-updated">Atualizado para a experiência atual</span><div className="top-avatar">BR</div></div>
-        </div>
+
 
         <section className="hero-section">
           <div className="hero-copy">
