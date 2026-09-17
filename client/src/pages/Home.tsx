@@ -79,7 +79,23 @@ const modules: Module[] = [
       { title: "Como bloquear", body: "Busque o nome, abra o perfil ou agendamento e use Bloquear no final da tela. O bloqueio deve seguir a orientação da gestão." },
     ],
   },
-
+  {
+    id: "loja",
+    eyebrow: "Contexto",
+    title: "Troca de loja",
+    short: "Escolha em qual loja você está trabalhando.",
+    description: "Se você tiver acesso a mais de uma loja, escolha aqui qual delas quer consultar antes de criar ou alterar qualquer informação.",
+    tone: "rose",
+    icon: Store,
+    route: "menu lateral",
+    duration: "2 min",
+    steps: ["Clique no nome da loja no menu à esquerda.", "Escolha a loja desejada na lista.", "Confira se o nome mudou antes de continuar."],
+    tip: "Sempre confira o nome da loja. Uma troca de loja muda as informações que aparecem nas outras telas.",
+    details: [
+      { title: "Por que isso importa", body: "Cada loja pode ter vagas, pessoas e valores diferentes. Por isso, a plataforma sempre mostra o nome da loja escolhida." },
+      { title: "Um hábito importante", body: "Olhe o nome da loja antes de adicionar uma vaga, consultar valores ou convidar alguém para acessar a plataforma." },
+    ],
+  },
   {
     id: "perfil",
     eyebrow: "Sua conta",
@@ -120,7 +136,7 @@ function RealScreen({ module }: { module: Module }) {
     <div className="real-screen-wrap">
       <div className="real-screen-bar"><span className="real-dot red" /><span className="real-dot yellow" /><span className="real-dot green" /><span className="real-address">cliente.iwof.com.br{path}</span><a href={`https://cliente.iwof.com.br${path}`} target="_blank" rel="noreferrer" aria-label="Abrir tela real em nova aba"><ExternalLink size={13} /></a></div>
       <div className="real-screen platform-capture">
-        <aside className="capture-sidebar"><strong>iWof</strong><span className={isDashboard ? "capture-active" : ""}>⌂ Dashboard</span><span className={isBookings ? "capture-active" : ""}>▤ Agendamentos</span><i /><span className={isProfile ? "capture-active" : ""}>♙ Perfil</span></aside>
+        <aside className="capture-sidebar"><strong>iWof</strong><span className={isDashboard ? "capture-active" : ""}>⌂ Dashboard</span><span className={isBookings ? "capture-active" : ""}>▤ Agendamentos</span><i /><span>▱ iWof Loja 1　›</span><span className={isProfile ? "capture-active" : ""}>♙ Perfil</span></aside>
         <div className="capture-main"><div className="capture-top"><span>Hoje, 17 de setembro de 2026</span><b>BR</b></div><div className="capture-body"><div className="capture-title"><div><h4>{title}</h4><p>{isBookings ? "Consulte e gerencie os agendamentos da loja iWof Loja 1." : isProfile ? "Gerencie suas informações pessoais e configurações da conta." : "Acompanhe as vagas e a presença da sua equipe."}</p></div>{isDashboard && <button className="flex items-center gap-1 bg-red-50 border border-red-200 text-red-600 font-bold px-2 py-1.5 rounded text-[8px] pointer-events-none" style={{ marginTop: '-4px' }}>Requer Ação<span className="bg-red-600 text-white rounded-full px-1.5 py-0.5 text-[6px] ml-1">2</span></button>}</div>
           {isProfile ? <div className="capture-profile"><div><small>INFORMAÇÕES PESSOAIS</small><strong>Nome completo<br /><em>Breno</em></strong><strong>E-mail<br /><em>breno@iwof.com.br</em></strong></div><div><small>SEGURANÇA</small><strong>Senha　••••••••••</strong><b className="capture-outline">Alterar senha</b></div></div> : <><div className="capture-filters"><span>Início　 01/09/2026</span><span>Fim　 26/09/2026</span><span>{isBookings ? "Todas　 Função" : "Todas as funções"}</span></div><div className="capture-cards"><b><small>{isBookings ? "Total de Agendamentos" : isDashboard ? "Vagas do dia" : "Vagas disponíveis"}</small><strong>{isBookings ? "0" : isDashboard ? "67" : "2.486"}</strong></b><b><small>{isBookings ? "Em andamento" : isDashboard ? "Presentes" : "Vagas ocupadas"}</small><strong className={isDashboard ? "text-green-600" : ""}>{isBookings ? "0" : isDashboard ? "29" : "0"}</strong></b><b><small>{isBookings ? "Realizados" : isDashboard ? "Pendentes" : "Total de vagas"}</small><strong className={isDashboard ? "text-orange-500" : ""}>{isBookings ? "0" : isDashboard ? "38" : "0"}</strong></b></div>
           {isDashboard ? (
