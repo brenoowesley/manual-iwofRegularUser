@@ -96,23 +96,6 @@ const modules: Module[] = [
     ],
   },
   {
-    id: "financeiro",
-    eyebrow: "Controle",
-    title: "Financeiro",
-    short: "Confira os valores do período.",
-    description: "Veja quanto deve ser pago, quantas horas foram trabalhadas e quais trabalhos foram realizados em um período.",
-    tone: "peach",
-    icon: Landmark,
-    route: "/financeiro",
-    duration: "4 min",
-    steps: ["Escolha a primeira e a última data da consulta.", "Se quiser, escolha uma função específica.", "Leia os quatro cartões com os totais do período."],
-    tip: "Se aparecer R$ 0,00, confira primeiro as datas. Também é possível que ainda não exista nenhum trabalho realizado nesse período.",
-    details: [
-      { title: "O que aparece aqui", body: "Você verá o valor total, as horas trabalhadas, quantos tipos de trabalho foram feitos e quantos agendamentos entraram na conta." },
-      { title: "Antes de confirmar um valor", body: "Compare esta tela com os agendamentos que foram realmente realizados no mesmo período." },
-    ],
-  },
-  {
     id: "loja",
     eyebrow: "Contexto",
     title: "Troca de loja",
@@ -127,23 +110,6 @@ const modules: Module[] = [
     details: [
       { title: "Por que isso importa", body: "Cada loja pode ter vagas, pessoas e valores diferentes. Por isso, a plataforma sempre mostra o nome da loja escolhida." },
       { title: "Um hábito importante", body: "Olhe o nome da loja antes de adicionar uma vaga, consultar valores ou convidar alguém para acessar a plataforma." },
-    ],
-  },
-  {
-    id: "admin",
-    eyebrow: "Governança",
-    title: "Administração",
-    short: "Cadastre funções e pessoas da equipe.",
-    description: "Use esta área para organizar os tipos de trabalho da loja e controlar quem pode entrar na plataforma.",
-    tone: "navy",
-    icon: Settings2,
-    route: "/admin",
-    duration: "6 min",
-    steps: ["Clique em Administração no menu à esquerda.", "Escolha Funções ou Usuários.", "Use Novo usuário para convidar alguém e a busca para encontrar um cadastro."],
-    tip: "Só cadastre pessoas que realmente precisam usar a plataforma e confira o e-mail antes de salvar.",
-    details: [
-      { title: "Funções", body: "Gerencie as funções da loja e use a busca por nome para encontrar rapidamente uma posição cadastrada." },
-      { title: "Usuários", body: "Consulte usuários por nome ou e-mail, crie novos acessos e mantenha o time alinhado ao escopo de cada operação." },
     ],
   },
   {
@@ -163,23 +129,6 @@ const modules: Module[] = [
       { title: "Segurança", body: "Altere sua senha sempre que houver suspeita de acesso indevido e encerre a sessão em equipamentos compartilhados." },
     ],
   },
-  {
-    id: "assistente",
-    eyebrow: "Atalho inteligente",
-    title: "Assistente",
-    short: "Peça ajuda sem sair do fluxo.",
-    description: "O assistente contextual ajuda a criar ou filtrar vagas e oferece atalhos para as tarefas mais frequentes.",
-    tone: "sky",
-    icon: Sparkles,
-    route: "botão flutuante",
-    duration: "2 min",
-    steps: ["Abra o botão de assistente no canto superior.", "Use Adicionar Vaga ou Filtrar Vaga.", "Descreva o que precisa no campo de mensagem."],
-    tip: "Seja específico: informe função, data, horário e quantidade para chegar mais rápido ao resultado desejado.",
-    details: [
-      { title: "O que ele resolve", body: "O assistente é um caminho curto para criar ou filtrar vagas sem precisar navegar por todas as etapas manualmente." },
-      { title: "Como pedir", body: "Escreva uma frase direta, como: 'Quero filtrar vagas de Auxiliar de entrega para amanhã às 08:00'." },
-    ],
-  },
 ];
 
 const toneClass: Record<string, string> = {
@@ -197,18 +146,16 @@ function RealScreen({ module }: { module: Module }) {
   const path = module.route.startsWith("/") ? module.route : "/";
   const isJobs = module.id === "vagas";
   const isBookings = module.id === "agendamentos";
-  const isFinance = module.id === "financeiro";
   const isProfile = module.id === "perfil";
-  const isAdmin = module.id === "admin";
   const isDashboard = module.id === "dashboard";
-  const title = isJobs ? "Vagas" : isBookings ? "Agendamentos" : isFinance ? "Extrato Financeiro" : isProfile ? "Perfil" : isAdmin ? "Usuários" : module.title;
+  const title = isJobs ? "Vagas" : isBookings ? "Agendamentos" : isProfile ? "Perfil" : module.title;
   return (
     <div className="real-screen-wrap">
       <div className="real-screen-bar"><span className="real-dot red" /><span className="real-dot yellow" /><span className="real-dot green" /><span className="real-address">dev-cliente.iwof.com.br{path}</span><a href={`https://dev-cliente.iwof.com.br${path}`} target="_blank" rel="noreferrer" aria-label="Abrir tela real em nova aba"><ExternalLink size={13} /></a></div>
       <div className="real-screen platform-capture">
-        <aside className="capture-sidebar"><strong>iWof</strong><span className={isDashboard ? "capture-active" : ""}>⌂ Dashboard</span><span className={isJobs ? "capture-active" : ""}>▣ Vagas</span><span className={isBookings ? "capture-active" : ""}>▤ Agendamentos</span><span className={isFinance ? "capture-active" : ""}>▧ Financeiro</span><i /><span>▱ iWof Loja 1　›</span><span className={isAdmin ? "capture-active" : ""}>⚙ Admin</span><span className={isProfile ? "capture-active" : ""}>♙ Perfil</span></aside>
-        <div className="capture-main"><div className="capture-top"><span>Hoje, 17 de setembro de 2026</span><b>BR</b></div><div className="capture-body"><div className="capture-title"><div><h4>{title}</h4><p>{isJobs ? "Gerencie todas as vagas da loja iWof Loja 1." : isBookings ? "Consulte e gerencie os agendamentos da loja iWof Loja 1." : isFinance ? "Detalhamento da cobrança da loja iWof Loja 1 referente ao período selecionado." : isAdmin ? "Gerencie os usuários da sua empresa." : isProfile ? "Gerencie suas informações pessoais e configurações da conta." : "Acompanhe as vagas e a presença da sua equipe."}</p></div>{isJobs && <b className="capture-add">＋ Adicionar vaga</b>}{isDashboard && <button className="flex items-center gap-1 bg-red-50 border border-red-200 text-red-600 font-bold px-2 py-1.5 rounded text-[8px] pointer-events-none" style={{ marginTop: '-4px' }}>Requer Ação<span className="bg-red-600 text-white rounded-full px-1.5 py-0.5 text-[6px] ml-1">2</span></button>}</div>
-          {isAdmin ? <div className="capture-admin-tabs"><b>Funções</b><b className="tab-selected">Usuários</b><div className="capture-search">⌕　Buscar por nome ou e-mail</div></div> : isProfile ? <div className="capture-profile"><div><small>INFORMAÇÕES PESSOAIS</small><strong>Nome completo<br /><em>Breno</em></strong><strong>E-mail<br /><em>breno@iwof.com.br</em></strong></div><div><small>SEGURANÇA</small><strong>Senha　••••••••••</strong><b className="capture-outline">Alterar senha</b></div></div> : <><div className="capture-filters"><span>{isJobs ? "⌕ Buscar por id" : "Início　 01/09/2026"}</span><span>{isJobs ? "Todas as funções" : isFinance ? "Fim　 17/09/2026" : "Fim　 26/09/2026"}</span><span>{isJobs ? "Horário da escala" : isBookings ? "Todas　 Função" : "Todas as funções"}</span></div><div className="capture-cards"><b><small>{isFinance ? "Valor Total do Período" : isBookings ? "Total de Agendamentos" : isDashboard ? "Vagas do dia" : "Vagas disponíveis"}</small><strong>{isFinance ? "R$ 0,00" : isBookings ? "0" : isDashboard ? "67" : "2.486"}</strong></b><b><small>{isFinance ? "Horas Trabalhadas" : isBookings ? "Em andamento" : isDashboard ? "Presentes" : "Vagas ocupadas"}</small><strong className={isDashboard ? "text-green-600" : ""}>{isFinance ? "0 h" : isBookings ? "0" : isDashboard ? "29" : "0"}</strong></b><b><small>{isFinance ? "Funções Faturadas" : isBookings ? "Realizados" : isDashboard ? "Pendentes" : "Total de vagas"}</small><strong className={isDashboard ? "text-orange-500" : ""}>{isFinance ? "0" : isBookings ? "0" : isDashboard ? "38" : "0"}</strong></b></div>
+        <aside className="capture-sidebar"><strong>iWof</strong><span className={isDashboard ? "capture-active" : ""}>⌂ Dashboard</span><span className={isJobs ? "capture-active" : ""}>▣ Vagas</span><span className={isBookings ? "capture-active" : ""}>▤ Agendamentos</span><i /><span>▱ iWof Loja 1　›</span><span className={isProfile ? "capture-active" : ""}>♙ Perfil</span></aside>
+        <div className="capture-main"><div className="capture-top"><span>Hoje, 17 de setembro de 2026</span><b>BR</b></div><div className="capture-body"><div className="capture-title"><div><h4>{title}</h4><p>{isJobs ? "Gerencie todas as vagas da loja iWof Loja 1." : isBookings ? "Consulte e gerencie os agendamentos da loja iWof Loja 1." : isProfile ? "Gerencie suas informações pessoais e configurações da conta." : "Acompanhe as vagas e a presença da sua equipe."}</p></div>{isJobs && <b className="capture-add">＋ Adicionar vaga</b>}{isDashboard && <button className="flex items-center gap-1 bg-red-50 border border-red-200 text-red-600 font-bold px-2 py-1.5 rounded text-[8px] pointer-events-none" style={{ marginTop: '-4px' }}>Requer Ação<span className="bg-red-600 text-white rounded-full px-1.5 py-0.5 text-[6px] ml-1">2</span></button>}</div>
+          {isProfile ? <div className="capture-profile"><div><small>INFORMAÇÕES PESSOAIS</small><strong>Nome completo<br /><em>Breno</em></strong><strong>E-mail<br /><em>breno@iwof.com.br</em></strong></div><div><small>SEGURANÇA</small><strong>Senha　••••••••••</strong><b className="capture-outline">Alterar senha</b></div></div> : <><div className="capture-filters"><span>{isJobs ? "⌕ Buscar por id" : "Início　 01/09/2026"}</span><span>{isJobs ? "Todas as funções" : "Fim　 26/09/2026"}</span><span>{isJobs ? "Horário da escala" : isBookings ? "Todas　 Função" : "Todas as funções"}</span></div><div className="capture-cards"><b><small>{isBookings ? "Total de Agendamentos" : isDashboard ? "Vagas do dia" : "Vagas disponíveis"}</small><strong>{isBookings ? "0" : isDashboard ? "67" : "2.486"}</strong></b><b><small>{isBookings ? "Em andamento" : isDashboard ? "Presentes" : "Vagas ocupadas"}</small><strong className={isDashboard ? "text-green-600" : ""}>{isBookings ? "0" : isDashboard ? "29" : "0"}</strong></b><b><small>{isBookings ? "Realizados" : isDashboard ? "Pendentes" : "Total de vagas"}</small><strong className={isDashboard ? "text-orange-500" : ""}>{isBookings ? "0" : isDashboard ? "38" : "0"}</strong></b></div>
           {isDashboard ? (
             <div className="mt-4 bg-white border border-slate-200 rounded overflow-hidden shadow-sm">
               <div className="grid grid-cols-4 gap-2 px-3 py-2 bg-slate-50 border-b border-slate-100 text-[6px] font-bold text-slate-400 uppercase tracking-wider"><div>Vaga / Horário</div><div className="text-center">Programados</div><div className="text-center">Presentes</div><div className="text-center">Pendentes</div></div>
@@ -226,7 +173,7 @@ function RealScreen({ module }: { module: Module }) {
               </div>
             </div>
           ) : (
-            <div className="capture-table"><span>{isJobs ? "Vaga　 Sexo / Certificado　 Período　 Escalas　 Quantidade" : isBookings ? "Nome　 Função　 Data　 Horário　 Status" : isFinance ? "Nenhum agendamento concretizado no período selecionado." : "Resumo da operação da loja"}</span><i /><i /><i /><i /></div>
+            <div className="capture-table"><span>{isJobs ? "Vaga　 Sexo / Certificado　 Período　 Escalas　 Quantidade" : isBookings ? "Nome　 Função　 Data　 Horário　 Status" : "Resumo da operação da loja"}</span><i /><i /><i /><i /></div>
           )}
           </>}
         </div></div>
@@ -245,7 +192,6 @@ export default function Home() {
   const [completed, setCompleted] = useState<string[]>([]);
   const [query, setQuery] = useState("");
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [assistantOpen, setAssistantOpen] = useState(false);
   const [openDetail, setOpenDetail] = useState<number | null>(0);
 
   const active = modules.find((item) => item.id === activeId) ?? modules[0];
@@ -306,7 +252,7 @@ export default function Home() {
       <main className="main-area">
         <div className="topbar">
           <div className="breadcrumbs"><span>iWof</span><span>/</span><strong>Manual interativo</strong></div>
-          <div className="topbar-actions"><span className="last-updated">Atualizado para a experiência atual</span><button className="help-button" onClick={() => setAssistantOpen(true)}><CircleHelp size={17} /> Preciso de ajuda</button><div className="top-avatar">BR</div></div>
+          <div className="topbar-actions"><span className="last-updated">Atualizado para a experiência atual</span><div className="top-avatar">BR</div></div>
         </div>
 
         <section className="hero-section">
@@ -341,7 +287,7 @@ export default function Home() {
               <div className="card-bottom"><span>{item.duration}</span>{completed.includes(item.id) ? <span className="done-label"><CheckCircle2 size={15} /> concluído</span> : <ArrowRight size={16} />}</div>
             </button>)}
           </div>
-          {filtered.length === 0 && <div className="empty-search"><Filter size={18} /> Nenhum módulo encontrado. Tente “vaga”, “perfil” ou “financeiro”.</div>}
+          {filtered.length === 0 && <div className="empty-search"><Filter size={18} /> Nenhum módulo encontrado. Tente “vaga”, “perfil” ou “dashboard”.</div>}
         </section>
 
         <section className="detail-layout" id="module-detail">
@@ -357,14 +303,11 @@ export default function Home() {
           <aside className="detail-aside">
             <div className={`tip-card ${toneClass[active.tone]}`}><div className="tip-icon"><Sparkles size={17} /></div><span className="section-kicker">{active.id === "dashboard" || active.id === "agendamentos" ? "ATENÇÃO" : "OLHO DE QUEM OPERA"}</span><p>{active.tip}</p></div>
             <div className="next-card"><span className="section-kicker">PRÓXIMO PASSO</span>{activeIndex < modules.length - 1 ? <><strong>{modules[activeIndex + 1].title}</strong><p>{modules[activeIndex + 1].short}</p><button onClick={nextModule}>Continuar <ArrowRight size={16} /></button></> : <><strong>Você chegou ao fim.</strong><p>Revise os módulos que quiser e volte sempre que precisar.</p><button onClick={() => selectModule("dashboard")}><ArrowLeft size={16} /> Voltar ao início</button></>}</div>
-            <div className="help-card"><div className="help-card-icon"><LifeBuoy size={17} /></div><div><strong>Travou em algum ponto?</strong><p>O assistente da plataforma pode ajudar em tarefas de Vagas.</p><button onClick={() => setAssistantOpen(true)}>Abrir ajuda <ArrowRight size={14} /></button></div></div>
           </aside>
         </section>
 
         <footer className="footer"><AppLogo /><span>feito para a rotina ficar mais leve.</span><span className="footer-right">iWof · manual de operação</span></footer>
       </main>
-
-      {assistantOpen && <div className="assistant-overlay" onClick={() => setAssistantOpen(false)}><div className="assistant-panel" onClick={(event) => event.stopPropagation()}><div className="assistant-head"><div><span className="assistant-spark"><Sparkles size={16} /></span><div><span className="section-kicker">ATENDIMENTO RÁPIDO</span><h3>Como posso ajudar?</h3></div></div><button className="icon-button" onClick={() => setAssistantOpen(false)} aria-label="Fechar ajuda"><X size={18} /></button></div><p className="assistant-intro">Escolha uma dúvida comum ou escreva o que você precisa entender.</p><div className="assistant-prompts"><button onClick={() => { setAssistantOpen(false); selectModule("vagas"); }}>Como criar uma vaga? <ArrowRight size={15} /></button><button onClick={() => { setAssistantOpen(false); selectModule("financeiro"); }}>Como conferir o financeiro? <ArrowRight size={15} /></button><button onClick={() => { setAssistantOpen(false); selectModule("loja"); }}>Como trocar de loja? <ArrowRight size={15} /></button></div><div className="assistant-input"><Search size={16} /><input placeholder="Digite sua pergunta..." /><span>⌘ K</span></div></div></div>}
     </div>
   );
 }
