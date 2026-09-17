@@ -61,23 +61,7 @@ const modules: Module[] = [
       { title: "Como terminar o turno", body: "Depois que o trabalho acabar, clique em Avaliar, dê uma nota de 1 a 5 com uma observação curta e confirme. Em seguida, clique em Forçar encerramento para fechar as horas." },
     ],
   },
-  {
-    id: "vagas",
-    eyebrow: "Planejamento",
-    title: "Vagas",
-    short: "Cadastre os trabalhos disponíveis.",
-    description: "Aqui você cria as vagas de trabalho e encontra uma vaga já cadastrada usando filtros simples, como função, horário e data.",
-    tone: "lilac",
-    icon: BriefcaseBusiness,
-    route: "/vagas",
-    duration: "7 min",
-    steps: ["Clique em + Adicionar vaga.", "Escolha o Assistente para escrever o que precisa ou use o formulário padrão.", "Revise Função, Sexo, Período, Escalas e Quantidade e clique em Publicar vaga."],
-    tip: "Você não precisa preencher todos os filtros. Comece pelo que você sabe, como a data ou o nome da função.",
-    details: [
-      { title: "Assistente ou formulário?", body: "No Assistente, escreva algo como: 'Preciso de 5 embaladores para domingo das 08h às 14h'. No formulário, escolha repetição, função, sexo, período, escala e quantidade." },
-      { title: "Antes de publicar", body: "Confira principalmente data, horário, quantidade e função. Depois de revisar, clique em Publicar vaga para disponibilizar o trabalho." },
-    ],
-  },
+
   {
     id: "agendamentos",
     eyebrow: "Acompanhamento",
@@ -144,18 +128,17 @@ const toneClass: Record<string, string> = {
 
 function RealScreen({ module }: { module: Module }) {
   const path = module.route.startsWith("/") ? module.route : "/";
-  const isJobs = module.id === "vagas";
   const isBookings = module.id === "agendamentos";
   const isProfile = module.id === "perfil";
   const isDashboard = module.id === "dashboard";
-  const title = isJobs ? "Vagas" : isBookings ? "Agendamentos" : isProfile ? "Perfil" : module.title;
+  const title = isBookings ? "Agendamentos" : isProfile ? "Perfil" : module.title;
   return (
     <div className="real-screen-wrap">
       <div className="real-screen-bar"><span className="real-dot red" /><span className="real-dot yellow" /><span className="real-dot green" /><span className="real-address">dev-cliente.iwof.com.br{path}</span><a href={`https://dev-cliente.iwof.com.br${path}`} target="_blank" rel="noreferrer" aria-label="Abrir tela real em nova aba"><ExternalLink size={13} /></a></div>
       <div className="real-screen platform-capture">
-        <aside className="capture-sidebar"><strong>iWof</strong><span className={isDashboard ? "capture-active" : ""}>⌂ Dashboard</span><span className={isJobs ? "capture-active" : ""}>▣ Vagas</span><span className={isBookings ? "capture-active" : ""}>▤ Agendamentos</span><i /><span>▱ iWof Loja 1　›</span><span className={isProfile ? "capture-active" : ""}>♙ Perfil</span></aside>
-        <div className="capture-main"><div className="capture-top"><span>Hoje, 17 de setembro de 2026</span><b>BR</b></div><div className="capture-body"><div className="capture-title"><div><h4>{title}</h4><p>{isJobs ? "Gerencie todas as vagas da loja iWof Loja 1." : isBookings ? "Consulte e gerencie os agendamentos da loja iWof Loja 1." : isProfile ? "Gerencie suas informações pessoais e configurações da conta." : "Acompanhe as vagas e a presença da sua equipe."}</p></div>{isJobs && <b className="capture-add">＋ Adicionar vaga</b>}{isDashboard && <button className="flex items-center gap-1 bg-red-50 border border-red-200 text-red-600 font-bold px-2 py-1.5 rounded text-[8px] pointer-events-none" style={{ marginTop: '-4px' }}>Requer Ação<span className="bg-red-600 text-white rounded-full px-1.5 py-0.5 text-[6px] ml-1">2</span></button>}</div>
-          {isProfile ? <div className="capture-profile"><div><small>INFORMAÇÕES PESSOAIS</small><strong>Nome completo<br /><em>Breno</em></strong><strong>E-mail<br /><em>breno@iwof.com.br</em></strong></div><div><small>SEGURANÇA</small><strong>Senha　••••••••••</strong><b className="capture-outline">Alterar senha</b></div></div> : <><div className="capture-filters"><span>{isJobs ? "⌕ Buscar por id" : "Início　 01/09/2026"}</span><span>{isJobs ? "Todas as funções" : "Fim　 26/09/2026"}</span><span>{isJobs ? "Horário da escala" : isBookings ? "Todas　 Função" : "Todas as funções"}</span></div><div className="capture-cards"><b><small>{isBookings ? "Total de Agendamentos" : isDashboard ? "Vagas do dia" : "Vagas disponíveis"}</small><strong>{isBookings ? "0" : isDashboard ? "67" : "2.486"}</strong></b><b><small>{isBookings ? "Em andamento" : isDashboard ? "Presentes" : "Vagas ocupadas"}</small><strong className={isDashboard ? "text-green-600" : ""}>{isBookings ? "0" : isDashboard ? "29" : "0"}</strong></b><b><small>{isBookings ? "Realizados" : isDashboard ? "Pendentes" : "Total de vagas"}</small><strong className={isDashboard ? "text-orange-500" : ""}>{isBookings ? "0" : isDashboard ? "38" : "0"}</strong></b></div>
+        <aside className="capture-sidebar"><strong>iWof</strong><span className={isDashboard ? "capture-active" : ""}>⌂ Dashboard</span><span className={isBookings ? "capture-active" : ""}>▤ Agendamentos</span><i /><span>▱ iWof Loja 1　›</span><span className={isProfile ? "capture-active" : ""}>♙ Perfil</span></aside>
+        <div className="capture-main"><div className="capture-top"><span>Hoje, 17 de setembro de 2026</span><b>BR</b></div><div className="capture-body"><div className="capture-title"><div><h4>{title}</h4><p>{isBookings ? "Consulte e gerencie os agendamentos da loja iWof Loja 1." : isProfile ? "Gerencie suas informações pessoais e configurações da conta." : "Acompanhe as vagas e a presença da sua equipe."}</p></div>{isDashboard && <button className="flex items-center gap-1 bg-red-50 border border-red-200 text-red-600 font-bold px-2 py-1.5 rounded text-[8px] pointer-events-none" style={{ marginTop: '-4px' }}>Requer Ação<span className="bg-red-600 text-white rounded-full px-1.5 py-0.5 text-[6px] ml-1">2</span></button>}</div>
+          {isProfile ? <div className="capture-profile"><div><small>INFORMAÇÕES PESSOAIS</small><strong>Nome completo<br /><em>Breno</em></strong><strong>E-mail<br /><em>breno@iwof.com.br</em></strong></div><div><small>SEGURANÇA</small><strong>Senha　••••••••••</strong><b className="capture-outline">Alterar senha</b></div></div> : <><div className="capture-filters"><span>Início　 01/09/2026</span><span>Fim　 26/09/2026</span><span>{isBookings ? "Todas　 Função" : "Todas as funções"}</span></div><div className="capture-cards"><b><small>{isBookings ? "Total de Agendamentos" : isDashboard ? "Vagas do dia" : "Vagas disponíveis"}</small><strong>{isBookings ? "0" : isDashboard ? "67" : "2.486"}</strong></b><b><small>{isBookings ? "Em andamento" : isDashboard ? "Presentes" : "Vagas ocupadas"}</small><strong className={isDashboard ? "text-green-600" : ""}>{isBookings ? "0" : isDashboard ? "29" : "0"}</strong></b><b><small>{isBookings ? "Realizados" : isDashboard ? "Pendentes" : "Total de vagas"}</small><strong className={isDashboard ? "text-orange-500" : ""}>{isBookings ? "0" : isDashboard ? "38" : "0"}</strong></b></div>
           {isDashboard ? (
             <div className="mt-4 bg-white border border-slate-200 rounded overflow-hidden shadow-sm">
               <div className="grid grid-cols-4 gap-2 px-3 py-2 bg-slate-50 border-b border-slate-100 text-[6px] font-bold text-slate-400 uppercase tracking-wider"><div>Vaga / Horário</div><div className="text-center">Programados</div><div className="text-center">Presentes</div><div className="text-center">Pendentes</div></div>
@@ -173,7 +156,7 @@ function RealScreen({ module }: { module: Module }) {
               </div>
             </div>
           ) : (
-            <div className="capture-table"><span>{isJobs ? "Vaga　 Sexo / Certificado　 Período　 Escalas　 Quantidade" : isBookings ? "Nome　 Função　 Data　 Horário　 Status" : "Resumo da operação da loja"}</span><i /><i /><i /><i /></div>
+            <div className="capture-table"><span>{isBookings ? "Nome　 Função　 Data　 Horário　 Status" : "Resumo da operação da loja"}</span><i /><i /><i /><i /></div>
           )}
           </>}
         </div></div>
@@ -269,7 +252,7 @@ export default function Home() {
           <div className="first-day-intro"><span className="section-kicker">PRIMEIRO DIA</span><h2>Você vai aprender nesta ordem</h2><p>Não precisa abrir tudo de uma vez. Siga o caminho abaixo e avance quando se sentir seguro.</p></div>
           <div className="first-day-step"><span>01</span><strong>Entender</strong><p>O que aparece no sistema e onde fica cada coisa.</p></div>
           <div className="first-day-step"><span>02</span><strong>Praticar</strong><p>Como fazer check-in, registrar uma falta e acompanhar um agendamento.</p></div>
-          <div className="first-day-step"><span>03</span><strong>Operar</strong><p>Como criar uma vaga, avaliar e encerrar um turno.</p></div>
+          <div className="first-day-step"><span>03</span><strong>Operar</strong><p>Como avaliar e encerrar um turno.</p></div>
         </section>
 
         <section className="progress-strip">
@@ -287,7 +270,7 @@ export default function Home() {
               <div className="card-bottom"><span>{item.duration}</span>{completed.includes(item.id) ? <span className="done-label"><CheckCircle2 size={15} /> concluído</span> : <ArrowRight size={16} />}</div>
             </button>)}
           </div>
-          {filtered.length === 0 && <div className="empty-search"><Filter size={18} /> Nenhum módulo encontrado. Tente “vaga”, “perfil” ou “dashboard”.</div>}
+          {filtered.length === 0 && <div className="empty-search"><Filter size={18} /> Nenhum módulo encontrado. Tente “perfil” ou “dashboard”.</div>}
         </section>
 
         <section className="detail-layout" id="module-detail">
