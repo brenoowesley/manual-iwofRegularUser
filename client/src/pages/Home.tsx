@@ -63,23 +63,6 @@ const modules: Module[] = [
   },
 
   {
-    id: "agendamentos",
-    eyebrow: "Acompanhamento",
-    title: "Agendamentos",
-    short: "Veja quem foi marcado e bloqueie acessos quando necessário.",
-    description: "Consulte as pessoas marcadas para trabalhar, acompanhe o histórico e, quando houver um problema de conduta ou desempenho, bloqueie o trabalhador selecionando o escopo do bloqueio.",
-    tone: "mint",
-    icon: ClipboardList,
-    route: "/agendamentos",
-    duration: "5 min",
-    steps: ["Escolha a data de início e a data de fim.", "Busque pelo nome e abra o agendamento da pessoa.", "Leia o histórico e clique em Bloquear apenas quando necessário, escolhendo se o bloqueio será apenas na Loja ou na Empresa toda."],
-    tip: "Bloquear é uma ação importante. Use somente quando houver orientação da gestão e uma ocorrência registrada.",
-    details: [
-      { title: "Os quatro indicadores", body: "Total de Agendamentos mostra o volume do período; Em andamento indica turnos ativos; Realizados mostra o que foi finalizado; Faltas registra ausências." },
-      { title: "Como bloquear", body: "Busque o nome, abra o agendamento e use Bloquear no final da tela. O sistema pedirá para você escolher o escopo (nível Loja ou Empresa). O bloqueio deve seguir a orientação da gestão." },
-    ],
-  },
-  {
     id: "loja",
     eyebrow: "Contexto",
     title: "Troca de loja",
