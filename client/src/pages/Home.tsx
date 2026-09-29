@@ -53,12 +53,12 @@ const modules: Module[] = [
     icon: LayoutDashboard,
     route: "/",
     duration: "4 min",
-    steps: ["Verifique o botão Requer Ação: ele acende quando há pendências urgentes.", "Clique no botão para filtrar rapidamente Atrasos e Próximos Inícios.", "Para seguir normalmente, busque a vaga, faça o Check-in e confirme a foto.", "No final, clique em Avaliar e Forçar encerramento."],
+    steps: ["Verifique o botão Requer Ação: ele acende quando há pendências urgentes.", "Clique no botão para filtrar rapidamente Atrasos e Próximos Inícios.", "Para seguir normalmente, busque a vaga, clique em Check-in e confirme o horário de início.", "No final do turno, clique em Finalizar agendamento, confirme o horário e faça a avaliação (Gostei / Não gostei)."],
     tip: "Deixe o sistema atuar como seu co-piloto. Se houver o botão vermelho Requer Ação, trate essas urgências primeiro antes de verificar o restante da operação.",
     details: [
       { title: "Fluxo de Badges: Requer Ação", body: "Sempre que existirem trabalhadores pendentes (próximos do início ou atrasados), um botão vermelho no topo alertará você. As vagas específicas também recebem uma tag vermelha indicando os minutos de atraso." },
       { title: "Tratativa de Atrasos", body: "Ao clicar em Requer Ação, você verá uma tela limpa, categorizada. Lá, você pode contatar rapidamente o profissional ou registrar a Falta, o que pode bloquear o trabalhador por 15 dias." },
-      { title: "Como terminar o turno", body: "Depois que o trabalho acabar, clique em Avaliar, dê uma nota de 1 a 5 com uma observação curta e confirme. Em seguida, clique em Forçar encerramento para fechar as horas." },
+      { title: "Como terminar o turno", body: "Ao final, clique em Finalizar agendamento e confirme o horário de término. Em seguida, o sistema abrirá a tela de avaliação, onde você pode marcar Gostei, Não gostei ou Pular, para então enviar a avaliação." },
     ],
   },
 
